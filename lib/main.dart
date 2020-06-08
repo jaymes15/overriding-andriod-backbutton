@@ -41,16 +41,50 @@ class _HomepageState extends State<Homepage>{
 
     @override
     Widget build(BuildContext context){
-      return Scaffold(
-      body:Center(
-      child: Text(
-    "Spalsh \n Screen",
-    style: TextStyle(
-    fontSize: 50.0,
-    fontFamily: "cursive",
-    )
-    ),
-      ),
+      return WillPopScope(
+        onWillPop: (){
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(
+                  "Warning"
+              ),
+              content: Text(
+                  "Are Sure You Want To Exit The Application ?"
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    onPressed: (){
+                      Navigator.of(context).pop(true);
+                    },
+                    child: Text(
+                        "Yes"
+                    )
+                ),
+                FlatButton(
+                    onPressed: (){
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Text(
+                        "No"
+                    )
+                ),
+              ],
+
+            ),
+          );
+        },
+        child: Scaffold(
+          body:Center(
+            child: Text(
+                "Spalsh \n Screen",
+                style: TextStyle(
+                  fontSize: 50.0,
+                  fontFamily: "cursive",
+                )
+            ),
+          ),
+        ),
       );
     }
   }
